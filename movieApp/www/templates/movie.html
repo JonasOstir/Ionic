@@ -1,0 +1,23 @@
+<div class="modal">
+	<ion-header-bar class="bar-dark">
+		<h1 class="title">Edit todo</h1>
+		<button class="button button-clear button-light" ng-click="closeEditTodo()">Cancel</button>
+	</ion-header-bar>
+	<ion-content>
+		<form ng-submit="edit(todo)">
+			<div class="list">
+				<label class="item item-input">
+					<input type="text" placeholder="{{ todo.what }}" ng-model="todo.what">
+				</label>
+			</div>
+			<div class="padding button-bar">
+				<ion-radio class="button-stable" ng-model="todo.priority" ng-value="'low'" icon="ion-android-star calm"><span>Low</span></ion-radio>
+				<ion-radio class="button-stable" ng-model="todo.priority" ng-value="'normal'" icon="ion-android-star energized"><span>Normal</span></ion-radio>
+				<ion-radio class="button-stable" ng-model="todo.priority" ng-value="'high'" icon="ion-android-star assertive"><span>High</span></ion-radio>
+			</div>
+			<div class="padding">
+				<button type="submit" class="button button-block button-dark">Edit Todo</button>
+			</div>
+		</form>
+	</ion-content>
+</div>
