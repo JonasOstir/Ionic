@@ -5,9 +5,13 @@
 // the 2nd parameter is an array of 'requires'
 var app = angular.module('starter', [
 	'ionic',
-	'ngResource'
+	'ngResource',
+	'moviesService',
+	'moviesControllers'
 ]);
 
+
+app.constant('APIURL', 'http://moviesdb.brm.us/api');
 
 app.constant('APIKEY', 'JaTQVBvA-FdfP6542-jzeTXp4R-HtSQHCHm-ckJUY9HD');
 
