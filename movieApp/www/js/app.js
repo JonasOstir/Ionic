@@ -8,6 +8,9 @@ var app = angular.module('starter', [
 	'ngResource'
 ]);
 
+
+app.constant('APIKEY', 'JaTQVBvA-FdfP6542-jzeTXp4R-HtSQHCHm-ckJUY9HD');
+
 app.run(function($ionicPlatform) {
 	$ionicPlatform.ready(function() {
 		// Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
