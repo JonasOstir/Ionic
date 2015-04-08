@@ -1,6 +1,6 @@
 var moviesControllers = angular.module('moviesControllers', []);
 
-moviesControllers.controller('moviesController', ['$scope', 'Movies', function($scope, Movies) {
+moviesControllers.controller('moviesController', ['$scope', 'Api', function($scope, Api) {
 	// $scope.$on('$ionicView.enter', function() {
 	// $scope.doRefresh();
 	// populateMovies();
@@ -14,7 +14,7 @@ moviesControllers.controller('moviesController', ['$scope', 'Movies', function($
 
 
 	var populateMovies = function() {
-		Movies.get(function(data) {
+		Api.Movies.get(function(data) {
 			$scope.movies = data;
 		});
 	};
