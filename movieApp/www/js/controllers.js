@@ -1,10 +1,10 @@
 var moviesControllers = angular.module('moviesControllers', []);
 
 moviesControllers.controller('moviesController', ['$scope', 'Movies', function($scope, Movies) {
-	$scope.$on('$ionicView.enter', function() {
-		// $scope.doRefresh();
-		populateMovies();
-	});
+	// $scope.$on('$ionicView.enter', function() {
+	// $scope.doRefresh();
+	// populateMovies();
+	// });
 
 	// $scope.doRefresh = function() {
 	// 	populateMovies().$promise.finally(function() {
@@ -14,8 +14,8 @@ moviesControllers.controller('moviesController', ['$scope', 'Movies', function($
 
 
 	var populateMovies = function() {
-		Movies.query(function(data) {
-			$scope.todos = data;
+		Movies.get(function(data) {
+			$scope.movies = data;
 		});
 	};
 
