@@ -12,11 +12,25 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 	// 	});
 	// };
 
+	// Setup the loader
+	$scope.$on('$ionicView.beforeEnter', function() {
+		$ionicLoading.show({
+			content: 'Loading',
+			animation: 'fade-in',
+			showBackdrop: true,
+			maxWidth: 200,
+			showDelay: 0
+		});
+	});
+
+
+
 
 	var populateMovies = function() {
 		Api.Movies.get(function(data) {
 			$localstorage.setObject('movies', data);
 			$scope.movies = $localstorage.getObject('movies');
+			$ionicLoading.hide();
 		});
 	};
 
