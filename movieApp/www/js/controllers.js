@@ -1,7 +1,9 @@
 var moviesControllers = angular.module('moviesControllers', []);
 
 moviesControllers.controller('moviesController', function($scope, Api, $localstorage, $ionicLoading) {
+
 	// $scope.$on('$ionicView.enter', function() {
+
 	// $scope.doRefresh();
 	// populateMovies();
 	// });
