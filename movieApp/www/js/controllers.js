@@ -27,16 +27,15 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 				$ionicLoading.hide();
 			});
 		} else {
+			alert('Movies fetched from offline storage!');
 			$scope.movies = $localstorage.getObject('movies');
+			$ionicLoading.hide();
 		}
 	};
 
-	console.log('online', online);
 	populateMovies();
-	console.log('storage', $localstorage.getObject('movies'));
 
 	$scope.doRefresh = function() {
-		console.log('refreshed');
 		populateMovies();
 		$scope.$broadcast('scroll.refreshComplete');
 	}
