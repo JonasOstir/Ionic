@@ -12,7 +12,6 @@ var app = angular.module('movieApp', [
 
 app.config(function($stateProvider, $urlRouterProvider) {
 	$urlRouterProvider.otherwise('/movies');
-	// console.log('app.js', navigator.connection.type);
 
 	$stateProvider.state('app', {
 		abstract: true,
