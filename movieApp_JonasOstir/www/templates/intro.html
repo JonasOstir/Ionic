@@ -1,0 +1,13 @@
+<div class="bar bar-header bar-dark">
+    <h1 class="title">Tap to add your favorite genres</h1>
+</div>
+<ion-content class="has-header">
+    <ion-item ng-repeat="genre in genres | orderBy:'title'">
+        <ion-checkbox ng-model="genre.checked" class="text-center">
+            <span>{{ genre.title }}</span>
+        </ion-checkbox>
+    </ion-item>
+    <button class="button button-block button-dark" ng-click="saveGenres()">
+        Save Genres
+    </button>
+</ion-content>
