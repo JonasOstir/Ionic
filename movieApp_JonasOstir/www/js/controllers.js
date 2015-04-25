@@ -45,24 +45,17 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPopup, $localstorage) {
 
 	var online = navigator.onLine;
-	console.log('online', online);
+	$scope.genreClickedClass = false;
 
 	if (online) {
-		var populateMovies = function() {
-			if (online) {
-				Api.Genres.get(function(data) {
-					$localstorage.setObject('genres', data);
-					$scope.genres = $localstorage.getObject('genres');
-					$ionicLoading.hide();
-				});
-			} else {
-				alert('Genres fetched from offline storage!');
-				$scope.movies = $localstorage.getObject('genres');
-				$ionicLoading.hide();
-			}
+		var fetchGenres = function() {
+			Api.Genres.get(function(data) {
+				$localstorage.setObject('genres', data);
+				$scope.genres = $localstorage.getObject('genres');
+			});
 		};
 
-		populateMovies();
+		fetchGenres();
 
 
 		// here we store wizard data
@@ -97,7 +90,7 @@ moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPo
 			}
 		});
 
-		console.log('here');
+		console.log('online here');
 	} else {
 		$ionicPopup.alert({
 			title: 'You are offline',

@@ -7,7 +7,7 @@ var app = angular.module('movieApp_JonasOstir', [
 	'ionic',
 	'ngResource',
 	'moviesService',
-	'moviesControllers'
+	'moviesControllers',
 ]);
 
 app.run(function($ionicPlatform) {
@@ -37,16 +37,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	}
 
 	$stateProvider.state('start', {
-		abstract: true,
 		url: '/start',
-		template: '<ion-nav-view></ion-nav-view>'
-	});
+		abstract: true,
+		// template: '<ion-nav-view title="intro"></ion-nav-view>'
+		templateUrl: 'templates/start.html'
+	})
 
 	$stateProvider.state('start.intro', {
 		url: '/intro',
-		templateUrl: 'templates/start.html',
+		templateUrl: 'templates/intro.html',
 		controller: 'IntroCtrl'
-	});
+	})
 
 	$stateProvider.state('app', {
 		abstract: true,
