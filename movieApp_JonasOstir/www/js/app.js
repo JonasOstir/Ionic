@@ -25,11 +25,10 @@ app.run(function($ionicPlatform) {
 })
 
 app.config(function($stateProvider, $urlRouterProvider) {
-	// set default route to wizard
+	// set default route to intro
 	var defaultRoute = '/start/intro';
-	// var defaultRoute = '/movies';
 
-	// check whether wizard has been run in order to change default route
+	// check whether the intro has been run in order to change default route - https://github.com/arielfaur/ionic-wizard
 	// we cannot inject ngStorage dependency in a config module, so we need to use plain localStorage object
 	if (localStorage.getItem('ngStorage-myAppRun')) {
 		console.log('wizard has been run - skip!');

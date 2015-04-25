@@ -43,55 +43,75 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 
 
 moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPopup, $localstorage) {
-
+	// First check if user is online.
 	var online = navigator.onLine;
-	$scope.genreClickedClass = false;
 
+	// User's favorite genrest.
+	var checked = [];
+
+	// If user is online.
 	if (online) {
+
+		/**
+		 *	Functions
+		 **/
+
+		// Get the genres from the api.
 		var fetchGenres = function() {
 			Api.Genres.get(function(data) {
-				$localstorage.setObject('genres', data);
-				$scope.genres = $localstorage.getObject('genres');
+				genres = data.content.genres;
+				setGenresUnchecked(genres);
+
+				$scope.genres = genres;
 			});
+		}
+
+		// Set all genres as false (user did not checked them yet).
+		var setGenresUnchecked = function(genres) {
+			var l = genres.length;
+			for (var i = 0; i < l; i++) {
+				genres[i].checked = false;
+			}
+		}
+
+		// When user wants his genres to be saved.
+		$scope.saveGenres = function() {
+			fillCheckedGenres();
+			start();
+		}
+
+		// Get genres clicked on by the user.
+		var fillCheckedGenres = function() {
+			var genres = $scope.genres;
+			var l = genres.length;
+			for (var i = 0; i < l; i++) {
+				if (genres[i].checked === true) {
+					checked.push(genres[i].title);
+				}
+			}
+		}
+
+		// Persist the user's genres.
+		function persistUserGenres(checked) {
+			// set flag to indicate wizard has been run
+			$localstorage.setObject('movieAppRun', true);
+
+			// save additional movieAppRun
+			$localstorage.setObject('checkedGenres', checked);
+		}
+
+		// Start the actual application
+		var start = function() {
+			// Save whatever data we need and then redirect to main app
+			persistUserGenres();
+
+			$state.go('app.movies.index');
 		};
 
 		fetchGenres();
 
-
-		// here we store wizard data
-		$scope.wizard = {};
-
-		function persistWizardData() {
-			// set flag to indicate wizard has been run
-			$localStorage.myAppRun = true;
-
-			// save additional data
-			$localStorage.myAppData = {
-				something: $scope.wizard.something,
-				someOtherData: 'test data'
-			};
-		}
-
-		$scope.start = function() {
-			// save whatever data we need and then redirect to main app
-			persistWizardData();
-
-			$state.go('app.movies');
-		};
-
-		$scope.$on('wizard:StepFailed', function(e, args) {
-			if (args.index == 1) {
-				$ionicPopup.alert({
-					title: 'Empty field',
-					template: 'Please enter a value!'
-				}).then(function(res) {
-					console.log('Field is empty');
-				});
-			}
-		});
-
-		console.log('online here');
 	} else {
+		// If the user is not online, let him know.
 		$ionicPopup.alert({
 			title: 'You are offline',
 			template: '<p>Put your device online!</p>'
