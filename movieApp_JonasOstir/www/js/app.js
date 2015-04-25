@@ -25,7 +25,28 @@ app.run(function($ionicPlatform) {
 })
 
 app.config(function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/movies');
+	// set default route to wizard
+	var defaultRoute = '/start/intro';
+	// var defaultRoute = '/movies';
+
+	// check whether wizard has been run in order to change default route
+	// we cannot inject ngStorage dependency in a config module, so we need to use plain localStorage object
+	if (localStorage.getItem('ngStorage-myAppRun')) {
+		console.log('wizard has been run - skip!');
+		defaultRoute = '/movies';
+	}
+
+	$stateProvider.state('start', {
+		abstract: true,
+		url: '/start',
+		template: '<ion-nav-view></ion-nav-view>'
+	});
+
+	$stateProvider.state('start.intro', {
+		url: '/intro',
+		templateUrl: 'templates/start.html',
+		controller: 'IntroCtrl'
+	});
 
 	$stateProvider.state('app', {
 		abstract: true,
@@ -70,4 +91,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 			}
 		}
 	});
+
+	$urlRouterProvider.otherwise(defaultRoute);
 });

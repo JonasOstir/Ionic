@@ -40,3 +40,71 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 		$scope.$broadcast('scroll.refreshComplete');
 	}
 });
+
+
+moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPopup, $localstorage) {
+
+	var online = navigator.onLine;
+	console.log('online', online);
+
+	if (online) {
+		var populateMovies = function() {
+			if (online) {
+				Api.Genres.get(function(data) {
+					$localstorage.setObject('genres', data);
+					$scope.genres = $localstorage.getObject('genres');
+					$ionicLoading.hide();
+				});
+			} else {
+				alert('Genres fetched from offline storage!');
+				$scope.movies = $localstorage.getObject('genres');
+				$ionicLoading.hide();
+			}
+		};
+
+		populateMovies();
+
+
+		// here we store wizard data
+		$scope.wizard = {};
+
+		function persistWizardData() {
+			// set flag to indicate wizard has been run
+			$localStorage.myAppRun = true;
+
+			// save additional data
+			$localStorage.myAppData = {
+				something: $scope.wizard.something,
+				someOtherData: 'test data'
+			};
+		}
+
+		$scope.start = function() {
+			// save whatever data we need and then redirect to main app
+			persistWizardData();
+
+			$state.go('app.movies');
+		};
+
+		$scope.$on('wizard:StepFailed', function(e, args) {
+			if (args.index == 1) {
+				$ionicPopup.alert({
+					title: 'Empty field',
+					template: 'Please enter a value!'
+				}).then(function(res) {
+					console.log('Field is empty');
+				});
+			}
+		});
+
+		console.log('here');
+	} else {
+		$ionicPopup.alert({
+			title: 'You are offline',
+			template: '<p>Put your device online!</p>'
+		}).then(function(res) {
+			ionic.Platform.exitApp()
+			console.log('Field is empty');
+		});
+	}
+});
