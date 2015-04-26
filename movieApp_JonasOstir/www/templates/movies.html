@@ -6,8 +6,8 @@
             </div>
             <ion-scroll direction="x" class="wide-as-needed borderBottom">
                 <div class="row">
-                    <div ng-repeat="movie in genre.movies" class="col col-33 shortInfo">
-                        <div class="col col-center card smallMovieCard" ui-sref="app.movies.detail({movie: movie.id})">
+                    <div ng-repeat="movie in genreMovies = (genre.movies)" class="col col-33 shortInfo">
+                        <div class="col col-center card smallMovieCard" ui-sref="app.movies.detail({movie: [movie.id, genreMovies[$index - 1].id, genre.id, genreMovies[$index + 1].id] })">
                             <!-- <div class="col col-center card smallMovieCard" on-tap="detail(movie)"> -->
                             <img class="center smallImage" src="{{ movie.cover_small }}" alt="">
                             <span class="smallTitle">{{ movie.title }}</span>

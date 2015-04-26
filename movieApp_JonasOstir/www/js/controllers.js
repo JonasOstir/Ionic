@@ -90,16 +90,23 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 		$scope.$broadcast('scroll.refreshComplete');
 	}
 
-	$scope.detail = function(movie) {
-		console.log('here');
-		$state.go('app.movies.detail');
-	}
-
 });
 
-moviesControllers.controller('movieDetailController', function($scope, $state, Api, $ionicPopup, $localstorage, movie) {
-	console.log('here', movie.content);
+moviesControllers.controller('movieDetailController', function($scope, $state, Api, $ionicPopup, $localstorage, movie, genre, next, previous, $ionicHistory) {
 	$scope.movie = movie;
+	console.log(typeof next === 'string', typeof previous === 'string');
+
+	$scope.previousMovieId = (previous !== 'undefined' ? previous : movie.id);
+	$scope.nextMovieId = (next !== 'undefined' ? next : movie.id);
+	$scope.genreId = genre.id;
+
+	$scope.goBack = function() {
+		$state.go('app.movies.index');
+	}
+});
+
+moviesControllers.controller('personController', function($scope, $state, Api, $localstorage, person) {
+	console.log('personcontroller');
 });
 
 

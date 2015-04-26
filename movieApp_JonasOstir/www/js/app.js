@@ -76,13 +76,46 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		templateUrl: 'templates/movie.html',
 		controller: 'movieDetailController',
 		resolve: {
+			genre: function($stateParams, Api) {
+				console.log('params', $stateParams)
+				var params = $stateParams.movie.split(',');
+				var g = Api.Genres.get({
+					id: params[2]
+				});
+				console.log('inside state', g);
+				return g;
+			},
 			movie: function($stateParams, Api) {
-				console.log('params', $stateParams);
+				var params = $stateParams.movie.split(',');
 				var m = Api.Movies.get({
-					id: $stateParams.movie
+					id: params[0]
 				});
 				console.log('inside state', m);
 				return m;
+			},
+			next: function($stateParams) {
+				var params = $stateParams.movie.split(',');
+				return params[3]
+			},
+			previous: function($stateParams) {
+				var params = $stateParams.movie.split(',');
+				return params[1]
+			}
+		}
+	});
+
+	$stateProvider.state('app.person', {
+		url: '/:person',
+		templateUrl: 'templates/person.html',
+		controller: 'personDetailController',
+		resolve: {
+			person: function($stateParams, Api) {
+				var params = $stateParams.movie.split(',');
+				var g = Api.People.get({
+					id: $stateParams.person
+				});
+				console.log('inside state', g);
+				return g;
 			}
 		}
 	});
