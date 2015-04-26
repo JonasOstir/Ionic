@@ -1,10 +1,19 @@
 <ion-view title="Movies">
     <ion-content>
-        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
-        <ion-list>
-            <ion-item ng-repeat="movie in movies.content.movies" can-swipe="true" ui-sref="app.movies.detail({movie: movie.id})">
-                <span>{{ movie.title }}</span>
-            </ion-item>
-        </ion-list>
+        <div ng-repeat="genre in genresBetter | orderBy:'title'">
+            <div>
+                <h2>{{ genre.title }}</h2>
+            </div>
+            <ion-scroll direction="x" class="wide-as-needed borderBottom">
+                <div class="row">
+                    <div ng-repeat="movie in genre.movies" class="col col-33 shortInfo">
+                        <div class="col col-center card smallMovieCard" on-tap="detail(movie)">
+                            <img class="center smallImage" src="{{ movie.cover_small }}" alt="">
+                            <span class="smallTitle">{{ movie.title }}</span>
+                        </div>
+                    </div>
+                </div>
+            </ion-scroll>
+        </div>
     </ion-content>
 </ion-view>

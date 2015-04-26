@@ -71,7 +71,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: 'moviesController',
 	});
 
-	$stateProvider.state('app.movies.detail', {
+	$stateProvider.state('app.movies.index.detail', {
 		url: '/:movie',
 		templateUrl: 'templates/movie.html',
 		controller: 'movieDetailController',

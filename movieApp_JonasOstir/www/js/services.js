@@ -17,7 +17,8 @@ moviesService.factory('Api', function($resource, APIURL, APIKEY) {
 					'X-Api-Key': 'JaTQVBvA-FdfP6542-jzeTXp4R-HtSQHCHm-ckJUY9HD',
 					'Content-Type': 'application/json'
 				},
-				cache: true
+				cache: true,
+				isArray: false
 			}
 		}),
 		Genres: $resource(APIURL + '/genres/:id', {
@@ -29,7 +30,8 @@ moviesService.factory('Api', function($resource, APIURL, APIKEY) {
 					'X-Api-Key': 'JaTQVBvA-FdfP6542-jzeTXp4R-HtSQHCHm-ckJUY9HD',
 					'Content-Type': 'application/json'
 				},
-				cache: true
+				cache: true,
+				isArray: false
 			}
 		}),
 		People: $resource(APIURL + '/people/:id', {
@@ -41,7 +43,8 @@ moviesService.factory('Api', function($resource, APIURL, APIKEY) {
 					'X-Api-Key': 'JaTQVBvA-FdfP6542-jzeTXp4R-HtSQHCHm-ckJUY9HD',
 					'Content-Type': 'application/json'
 				},
-				cache: true
+				cache: true,
+				isArray: false
 			}
 		})
 	};

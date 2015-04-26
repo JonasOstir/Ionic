@@ -34,11 +34,48 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 
 	var populateMovies = function() {
 		if (online) {
+			var genres;
+			var movies;
+
 			Api.Movies.get(function(data) {
-				$localstorage.setObject('movies', data);
+				movies = data.content;
+				$localstorage.setObject('movies', movies.movies);
 				$scope.movies = $localstorage.getObject('movies');
 				$ionicLoading.hide();
 			});
+
+			Api.Genres.get(function(data, genres) {
+				genres = data.content;
+				$localstorage.setObject('genres', genres.genres);
+				$scope.genres = $localstorage.getObject('genres');
+				$ionicLoading.hide();
+			});
+
+			movies = $localstorage.getObject('movies');
+			genres = $localstorage.getObject('genres');
+
+			var genresLength = genres.length;
+			var moviesLength = movies.length;
+
+			var genresBetter = [];
+
+			for (var g = 0; g < genresLength; g++) {
+				genres[g].movies = [];
+
+				for (var m = 0; m < moviesLength; m++) {
+					var movie = movies[m];
+					for (var gm = 0; gm < movie.genres.length; gm++) {
+						var movieGenre = movie.genres[gm];
+						if (movieGenre.id == genres[g].id) {
+							genres[g].movies.push(movie);
+						}
+					}
+				}
+				genresBetter.push(genres[g]);
+			}
+
+			$scope.favorites = $localstorage.getObject('checkedGenres');
+			$scope.genresBetter = genresBetter;
 		} else {
 			alert('Movies fetched from offline storage!');
 			$scope.movies = $localstorage.getObject('movies');
@@ -51,6 +88,11 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 	$scope.doRefresh = function() {
 		populateMovies();
 		$scope.$broadcast('scroll.refreshComplete');
+	}
+
+	$scope.detail = function(movie) {
+		console.log('here');
+		$state.go('app.movies.details');
 	}
 
 });

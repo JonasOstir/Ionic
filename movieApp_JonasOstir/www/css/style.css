@@ -3,3 +3,21 @@
 .favoriteGenre {
     background-color: #886AEA;
 }
+
+.smallImage {
+    display: block;
+    width: 100px;
+    height: auto;
+}
+
+.smallTitle {
+    display: block;
+    text-align: center;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.smallMovieCard {}
