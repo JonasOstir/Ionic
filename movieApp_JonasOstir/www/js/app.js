@@ -148,5 +148,21 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	});
 
+	$stateProvider.state('app.settings', {
+		abstract: true,
+		url: '/settings',
+		views: {
+			movies: {
+				template: '<ion-nav-view></ion-nav-view>'
+			}
+		}
+	});
+
+	$stateProvider.state('app.settings.index', {
+		url: '',
+		templateUrl: 'templates/settings.html',
+		controller: 'settingsController',
+	});
+
 	$urlRouterProvider.otherwise(defaultRoute);
 });

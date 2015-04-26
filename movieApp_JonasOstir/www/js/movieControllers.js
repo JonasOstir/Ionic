@@ -91,6 +91,15 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 
 });
 
+moviesControllers.controller('settingsController', function($scope, $state, Api, $localstorage, $localStorage) {
+	$scope.reset = function() {
+		console.log('here');
+		$localstorage.setObject('movieAppRun', false);
+		$state.go('start.intro');
+	};
+
+});
+
 moviesControllers.controller('movieDetailController', function($scope, $state, Api, $ionicPopup, $localstorage, movie, genre, next, previous, $ionicHistory) {
 	$scope.movie = movie;
 
