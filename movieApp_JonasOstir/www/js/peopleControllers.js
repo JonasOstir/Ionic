@@ -1,6 +1,6 @@
 var peopleControllers = angular.module('peopleControllers', []);
 
-peopleControllers.controller('peopleController', function($scope, Api) {
+peopleControllers.controller('peopleController', function($scope, Api, person) {
 	// $scope.person = person;
 	console.log('peopleController');
 

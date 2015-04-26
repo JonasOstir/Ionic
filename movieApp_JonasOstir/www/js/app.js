@@ -65,7 +65,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	});
 
-
 	$stateProvider.state('app.movies.index', {
 		url: '',
 		templateUrl: 'templates/movies.html',
@@ -107,7 +106,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		abstract: true,
 		url: '/people',
 		views: {
-			people: {
+			person: {
 				template: '<ion-nav-view></ion-nav-view>'
 			}
 		}
@@ -120,13 +119,13 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	});
 
 	$stateProvider.state('app.people.detail', {
-		url: '/:people',
+		url: '/:person',
 		templateUrl: 'templates/person.html',
 		controller: 'personController',
 		resolve: {
 			person: function($stateParams, Api) {
 				var person = Api.People.get({
-					id: $stateParams.person
+					id: $stateParams.people
 				});
 
 				console.log($stateParams, 'return person', person);

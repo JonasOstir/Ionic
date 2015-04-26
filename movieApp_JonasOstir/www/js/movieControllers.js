@@ -102,10 +102,11 @@ moviesControllers.controller('movieDetailController', function($scope, $state, A
 		$state.go('app.movies.index');
 	}
 
-	$scope.detail = function(actorId) {
-		console.log('actorId', actorId);
-		$state.go('app.people.detail');
-	}
+	// $scope.detail = function(actorId) {
+	// 	$state.go('app.people.detail', {
+	// 		'person': actorId
+	// 	});
+	// }
 });
 
 moviesControllers.controller('introController', function($scope, $state, Api, $ionicPopup, $localstorage) {
