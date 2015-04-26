@@ -73,7 +73,6 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 				}
 				genresBetter.push(genres[g]);
 			}
-
 			$scope.favorites = $localstorage.getObject('checkedGenres');
 			$scope.genresBetter = genresBetter;
 		} else {

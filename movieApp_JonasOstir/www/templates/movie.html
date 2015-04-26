@@ -16,6 +16,17 @@
                         </div>
                     </div>
                 </ion-scroll>
+
+                <h2>Directors:</h2>
+                <ion-scroll direction="x" class="wide-as-needed borderBottom">
+                    <div class="row">
+                        <div ng-repeat="director in movie.content.directors" class="col col-33 shortInfo">
+                            <div class="col col-center card smallMovieCard" ui-sref="app.people.detail({person: director.id})">
+                                <img class="center smallActor" src="http://moviesdb.brm.us/files/people/{{director.id}}.jpg" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
             </div>
             <div class="item tabs tabs-secondary tabs-icon-left">
                 <a class="tab-item" ng-click="goBack()">

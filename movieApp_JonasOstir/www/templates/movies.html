@@ -1,6 +1,6 @@
 <ion-view title="Movies">
     <ion-content>
-        <div ng-repeat="genre in genresBetter | orderBy:'title'">
+        <div ng-repeat="genre in genresBetter | orderBy:'favorites' ">
             <div>
                 <h2 class="smallTitle">{{ genre.title }}</h2>
             </div>
