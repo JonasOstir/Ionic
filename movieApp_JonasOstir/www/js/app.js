@@ -47,7 +47,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('start.intro', {
 		url: '/intro',
 		templateUrl: 'templates/intro.html',
-		controller: 'IntroCtrl'
+		controller: 'introController'
 	})
 
 	$stateProvider.state('app', {

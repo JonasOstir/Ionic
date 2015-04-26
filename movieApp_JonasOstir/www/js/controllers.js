@@ -1,16 +1,24 @@
 var moviesControllers = angular.module('moviesControllers', []);
 
-moviesControllers.controller('moviesController', function($scope, Api, $localstorage, $ionicLoading, $ionicPopup, $state) {
+moviesControllers.controller('moviesController', function($scope, Api, $localstorage, $localStorage, $stateParams, $ionicLoading, $ionicPopup, $state) {
+	// Check the online status.
 	if (navigator.onLine) {
 		online = true;
 	} else {
 		online = false;
 	}
 
-	// If the intro hasen't run yet, go to the intro.
-	if ($localstorage.getObject('movieAppRun') !== true) {
+	var test = window.localStorage;
+
+	if (test.movieAppRun == 'undefined') {
 		$state.go('start.intro');
 	}
+
+	// test = test.getObject('movieAppRun');
+	console.log('params', $stateParams);
+	console.log('moviesController', $localstorage, 'test', test.movieAppRun);
+	// If the intro hasen't run yet, go to the intro.
+	var checkedGenres = $localstorage.getObject('checkedGenres');
 
 	// Setup the loader
 	$scope.$on('$ionicView.beforeEnter', function() {
@@ -44,15 +52,13 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 		populateMovies();
 		$scope.$broadcast('scroll.refreshComplete');
 	}
+
 });
 
 
-moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPopup, $localstorage) {
+moviesControllers.controller('introController', function($scope, $state, Api, $ionicPopup, $localstorage) {
 	// First check if user is online.
 	var online = navigator.onLine;
-
-	// User's favorite genrest.
-	var checked = [];
 
 	// If user is online.
 	if (online) {
@@ -65,14 +71,14 @@ moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPo
 		var fetchGenres = function() {
 			Api.Genres.get(function(data) {
 				genres = data.content.genres;
-				setGenresUnchecked(genres);
+				buildGenres(genres);
 
 				$scope.genres = genres;
 			});
 		}
 
 		// Set all genres as false (user did not checked them yet).
-		var setGenresUnchecked = function(genres) {
+		var buildGenres = function(genres) {
 			var l = genres.length;
 			for (var i = 0; i < l; i++) {
 				genres[i].checked = false;
@@ -81,12 +87,13 @@ moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPo
 
 		// When user wants his genres to be saved.
 		$scope.saveGenres = function() {
-			fillCheckedGenres();
-			start();
+			checkedGenres = fillCheckedGenres();
+			start(checkedGenres);
 		}
 
 		// Get genres clicked on by the user.
 		var fillCheckedGenres = function() {
+			var checked = [];
 			var genres = $scope.genres;
 			var l = genres.length;
 			for (var i = 0; i < l; i++) {
@@ -94,6 +101,12 @@ moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPo
 					checked.push(genres[i].title);
 				}
 			}
+
+			if (genres.length === 0) {
+				genres = 'none';
+			}
+
+			return checked;
 		}
 
 		// Persist the user's genres.
@@ -106,11 +119,10 @@ moviesControllers.controller('IntroCtrl', function($scope, $state, Api, $ionicPo
 		}
 
 		// Start the actual application
-		var start = function() {
+		var start = function(checkedGenres) {
 			// Save whatever data we need and then redirect to main app
-			persistUserGenres();
-
-			$state.go('app.movies.index');
+			persistUserGenres(checkedGenres);
+			$state.go('app.movies.index', checkedGenres);
 		};
 
 		fetchGenres();
