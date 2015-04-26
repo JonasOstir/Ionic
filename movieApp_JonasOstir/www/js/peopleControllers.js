@@ -1,6 +1,6 @@
 var peopleControllers = angular.module('peopleControllers', []);
 
-peopleControllers.controller('peopleController', function($scope, Api, person) {
+peopleControllers.controller('peopleController', function($scope, Api, person, $localstorage) {
 	// $scope.person = person;
 	console.log('peopleController');
 
@@ -12,17 +12,11 @@ peopleControllers.controller('peopleController', function($scope, Api, person) {
 	});
 });
 
-peopleControllers.controller('personController', function($scope, Api, person) {
+peopleControllers.controller('personController', function($scope, person, Api, $localstorage) {
 	console.log('peopleController');
 	$scope.person = person;
+
+	$scope.goBack = function() {
+		window.history.back();
+	}
 });
-
-
-// moviesControllers.controller('peopleController', function($scope, Api, $localstorage, $localStorage, person, $stateParams, $ionicLoading, $ionicPopup, $state) {
-// 	console.log('people controller');
-// });
-
-
-// moviesControllers.controller('personController', function($scope, $state, Api, $localstorage, person, Api) {
-// 	console.log('personcontroller');
-// });

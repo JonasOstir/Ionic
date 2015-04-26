@@ -1,6 +1,7 @@
 var moviesControllers = angular.module('moviesControllers', []);
 
 moviesControllers.controller('moviesController', function($scope, Api, $localstorage, $localStorage, $stateParams, $ionicLoading, $ionicPopup, $state) {
+	console.log('moviesControllers');
 	// Check the online status.
 	if (navigator.onLine) {
 		online = true;

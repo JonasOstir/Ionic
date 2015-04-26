@@ -106,7 +106,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		abstract: true,
 		url: '/people',
 		views: {
-			person: {
+			movies: {
 				template: '<ion-nav-view></ion-nav-view>'
 			}
 		}
@@ -125,11 +125,16 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		resolve: {
 			person: function($stateParams, Api) {
 				var person = Api.People.get({
-					id: $stateParams.people
+					id: $stateParams.person
 				});
 
+				var movies = Api.PeopleMovies.get({
+					id: $stateParams.person
+				});
+
+				console.log($stateParams, 'return movies', movies);
 				console.log($stateParams, 'return person', person);
-				return person;
+				return [person, movies];
 			}
 		}
 	});

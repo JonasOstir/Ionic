@@ -1,5 +1,36 @@
-<ion-view title="{{ movie.content.title }}">
+<ion-view title="{{ person[0].content.name }}">
+    <!-- {{ person }} -->
     <ion-content>
-        personpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonpersonperson
+        <div class="list card">
+            <div class="item item-body cardBlock">
+                <img class="fullCover center" src="{{ person[0].content.photo }}">
+                <div class="smallTitle">
+                    {{ person[0].content.description }}
+                </div>
+
+                <h2>Stared in:</h2>
+                <ion-scroll direction="x" class="wide-as-needed borderBottom">
+                    <div class="row">
+                        <div ng-repeat="movie in person[1].content.movies" class="col col-33 shortInfo">
+                            <div class="col col-center card smallMovieCard" ui-sref="app.movies.detail({movie: movie.id})">
+                                <h3 class="smallTitle">{{ movie.title }}</h3>
+                                <img class="center smallMovie" src="{{ movie.cover_small }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </ion-scroll>
+            </div>
+            <div class="item tabs tabs-secondary tabs-icon-left">
+                <!-- <a class="tab-item" ui-sref="app.movies.detail({movie: previousMovieId })">
+                    <i class="icon ion-chevron-left"></i>
+                </a> -->
+                <a class="tab-item" ng-click="goBack()">
+                    Go Back
+                </a>
+                <!-- <a class="tab-item" ui-sref="app.movies.detail({movie: nextMovieId })">
+                    <i class="icon ion-chevron-right"></i>
+                </a> -->
+            </div>
+        </div>
     </ion-content>
 </ion-view>

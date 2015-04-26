@@ -47,7 +47,20 @@ moviesService.factory('Api', function($resource, APIURL, APIKEY) {
 				cache: true,
 				isArray: false
 			}
-		})
+		}),
+		PeopleMovies: $resource(APIURL + '/people/:id/movies', {
+			id: '@_id'
+		}, {
+			'get': {
+				method: 'GET',
+				headers: {
+					'X-Api-Key': 'JaTQVBvA-FdfP6542-jzeTXp4R-HtSQHCHm-ckJUY9HD',
+					'Content-Type': 'application/json'
+				},
+				cache: true,
+				isArray: false
+			}
+		}),
 	};
 });
 
