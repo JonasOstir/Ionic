@@ -71,15 +71,17 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: 'moviesController',
 	});
 
-	$stateProvider.state('app.movies.index.detail', {
+	$stateProvider.state('app.movies.detail', {
 		url: '/:movie',
 		templateUrl: 'templates/movie.html',
 		controller: 'movieDetailController',
 		resolve: {
-			movie: function($stateParams, Movies) {
-				var m = Movies.get({
+			movie: function($stateParams, Api) {
+				console.log('params', $stateParams);
+				var m = Api.Movies.get({
 					id: $stateParams.movie
 				});
+				console.log('inside state', m);
 				return m;
 			}
 		}

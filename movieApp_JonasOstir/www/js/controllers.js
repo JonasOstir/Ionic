@@ -92,9 +92,14 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 
 	$scope.detail = function(movie) {
 		console.log('here');
-		$state.go('app.movies.details');
+		$state.go('app.movies.detail');
 	}
 
+});
+
+moviesControllers.controller('movieDetailController', function($scope, $state, Api, $ionicPopup, $localstorage, movie) {
+	console.log('here', movie.content);
+	$scope.movie = movie;
 });
 
 

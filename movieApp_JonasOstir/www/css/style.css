@@ -10,6 +10,12 @@
     height: auto;
 }
 
+.fullCover {
+    display: block;
+    max-height: 250px;
+    width: auto;
+}
+
 .smallTitle {
     display: block;
     text-align: center;
@@ -21,3 +27,15 @@
 }
 
 .smallMovieCard {}
+
+.smallActor {
+    display: block;
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+    float: left;
+}
+
+.cardBlock {
+    display: block;
+}
