@@ -11,8 +11,9 @@
                 <ion-scroll direction="x" class="wide-as-needed borderBottom">
                     <div class="row">
                         <div ng-repeat="actor in movie.content.actors" class="col col-33 shortInfo">
-                            <div class="col col-center card smallMovieCard" ui-sref="app.person({person: actor.id })">
-                                <!-- <div class="col col-center card smallMovieCard" on-tap="detail(movie)"> -->
+                            <!-- <div class="col col-center card smallMovieCard" ui-sref="app.people.detail({person: actor.id })"> -->
+                            <!-- <div class="col col-center card smallMovieCard" on-tap="detail(actor.id)"> -->
+                            <div class="col col-center card smallMovieCard" ui-sref="app.people.detail({person: actor.id})">{{ actor.id }}
                                 <img class="center smallActor" src="http://moviesdb.brm.us/files/people/{{actor.id}}.jpg" alt="">
                             </div>
                         </div>

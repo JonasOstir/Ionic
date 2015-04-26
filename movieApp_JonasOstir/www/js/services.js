@@ -7,6 +7,7 @@ moviesService.constant('APIURL', 'http://moviesdb.brm.us/api');
 moviesService.constant('APIKEY', 'JaTQVBvA-FdfP6542-jzeTXp4R-HtSQHCHm-ckJUY9HD');
 
 moviesService.factory('Api', function($resource, APIURL, APIKEY) {
+	console.log("request done");
 	return {
 		Movies: $resource(APIURL + '/movies/:id', {
 			id: '@_id'

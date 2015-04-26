@@ -11,12 +11,11 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 	var test = window.localStorage;
 
 	if (test.movieAppRun == 'undefined') {
+		console.log('start');
 		$state.go('start.intro');
 	}
 
 	// test = test.getObject('movieAppRun');
-	console.log('params', $stateParams);
-	console.log('moviesController', $localstorage, 'test', test.movieAppRun);
 	// If the intro hasen't run yet, go to the intro.
 	var checkedGenres = $localstorage.getObject('checkedGenres');
 
@@ -94,7 +93,6 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 
 moviesControllers.controller('movieDetailController', function($scope, $state, Api, $ionicPopup, $localstorage, movie, genre, next, previous, $ionicHistory) {
 	$scope.movie = movie;
-	console.log(typeof next === 'string', typeof previous === 'string');
 
 	$scope.previousMovieId = (previous !== 'undefined' ? previous : movie.id);
 	$scope.nextMovieId = (next !== 'undefined' ? next : movie.id);
@@ -103,12 +101,12 @@ moviesControllers.controller('movieDetailController', function($scope, $state, A
 	$scope.goBack = function() {
 		$state.go('app.movies.index');
 	}
-});
 
-moviesControllers.controller('personController', function($scope, $state, Api, $localstorage, person) {
-	console.log('personcontroller');
+	$scope.detail = function(actorId) {
+		console.log('actorId', actorId);
+		$state.go('app.people.detail');
+	}
 });
-
 
 moviesControllers.controller('introController', function($scope, $state, Api, $ionicPopup, $localstorage) {
 	// First check if user is online.

@@ -8,6 +8,7 @@ var app = angular.module('movieApp_JonasOstir', [
 	'ngResource',
 	'moviesService',
 	'moviesControllers',
+	'peopleControllers',
 	'ngStorage'
 ]);
 
@@ -40,7 +41,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('start', {
 		url: '/start',
 		abstract: true,
-		// template: '<ion-nav-view title="intro"></ion-nav-view>'
 		templateUrl: 'templates/start.html'
 	})
 
@@ -65,6 +65,7 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	});
 
+
 	$stateProvider.state('app.movies.index', {
 		url: '',
 		templateUrl: 'templates/movies.html',
@@ -77,12 +78,10 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		controller: 'movieDetailController',
 		resolve: {
 			genre: function($stateParams, Api) {
-				console.log('params', $stateParams)
 				var params = $stateParams.movie.split(',');
 				var g = Api.Genres.get({
 					id: params[2]
 				});
-				console.log('inside state', g);
 				return g;
 			},
 			movie: function($stateParams, Api) {
@@ -90,7 +89,6 @@ app.config(function($stateProvider, $urlRouterProvider) {
 				var m = Api.Movies.get({
 					id: params[0]
 				});
-				console.log('inside state', m);
 				return m;
 			},
 			next: function($stateParams) {
@@ -104,18 +102,35 @@ app.config(function($stateProvider, $urlRouterProvider) {
 		}
 	});
 
-	$stateProvider.state('app.person', {
-		url: '/:person',
+
+	$stateProvider.state('app.people', {
+		abstract: true,
+		url: '/people',
+		views: {
+			people: {
+				template: '<ion-nav-view></ion-nav-view>'
+			}
+		}
+	});
+
+	$stateProvider.state('app.people.index', {
+		url: '',
+		templateUrl: 'templates/people.html',
+		controller: 'peopleController',
+	});
+
+	$stateProvider.state('app.people.detail', {
+		url: '/:people',
 		templateUrl: 'templates/person.html',
-		controller: 'personDetailController',
+		controller: 'personController',
 		resolve: {
 			person: function($stateParams, Api) {
-				var params = $stateParams.movie.split(',');
-				var g = Api.People.get({
+				var person = Api.People.get({
 					id: $stateParams.person
 				});
-				console.log('inside state', g);
-				return g;
+
+				console.log($stateParams, 'return person', person);
+				return person;
 			}
 		}
 	});
