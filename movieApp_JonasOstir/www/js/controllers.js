@@ -1,10 +1,15 @@
 var moviesControllers = angular.module('moviesControllers', []);
 
-moviesControllers.controller('moviesController', function($scope, Api, $localstorage, $ionicLoading, $ionicPopup) {
+moviesControllers.controller('moviesController', function($scope, Api, $localstorage, $ionicLoading, $ionicPopup, $state) {
 	if (navigator.onLine) {
 		online = true;
 	} else {
 		online = false;
+	}
+
+	// If the intro hasen't run yet, go to the intro.
+	if ($localstorage.getObject('movieAppRun') !== true) {
+		$state.go('start.intro');
 	}
 
 	// Setup the loader

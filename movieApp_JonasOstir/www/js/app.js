@@ -8,6 +8,7 @@ var app = angular.module('movieApp_JonasOstir', [
 	'ngResource',
 	'moviesService',
 	'moviesControllers',
+	'ngStorage'
 ]);
 
 app.run(function($ionicPlatform) {
@@ -27,10 +28,11 @@ app.run(function($ionicPlatform) {
 app.config(function($stateProvider, $urlRouterProvider) {
 	// set default route to intro
 	var defaultRoute = '/start/intro';
+	var storage = localStorage;
 
 	// check whether the intro has been run in order to change default route - https://github.com/arielfaur/ionic-wizard
 	// we cannot inject ngStorage dependency in a config module, so we need to use plain localStorage object
-	if (localStorage.getItem('ngStorage-myAppRun')) {
+	if (storage.movieAppRun) {
 		console.log('wizard has been run - skip!');
 		defaultRoute = '/movies';
 	}
