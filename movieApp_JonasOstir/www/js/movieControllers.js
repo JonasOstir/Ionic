@@ -73,8 +73,8 @@ moviesControllers.controller('moviesController', function($scope, Api, $localsto
 				}
 				genresBetter.push(genres[g]);
 			}
-			$scope.favorites = $localstorage.getObject('checkedGenres');
 			$scope.genresBetter = genresBetter;
+			$scope.favorites = $localstorage.getObject('checkedGenres');
 		} else {
 			alert('Movies fetched from offline storage!');
 			$scope.movies = $localstorage.getObject('movies');
@@ -95,6 +95,7 @@ moviesControllers.controller('settingsController', function($scope, $state, Api,
 	$scope.reset = function() {
 		console.log('here');
 		$localstorage.setObject('movieAppRun', false);
+		$localstorage.setObject('checkedGenres', []);
 		$state.go('start.intro');
 	};
 
