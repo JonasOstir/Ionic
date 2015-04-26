@@ -2,11 +2,11 @@
     <ion-content>
         <div ng-repeat="genre in genresBetter | orderBy:'title'">
             <div>
-                <h2>{{ genre.title }}</h2>
+                <h2 class="smallTitle">{{ genre.title }}</h2>
             </div>
-            <ion-scroll direction="x" class="wide-as-needed borderBottom">
-                <div class="row">
-                    <div ng-repeat="movie in genreMovies = (genre.movies)" class="col col-33 shortInfo">
+            <ion-scroll direction="x" class="wide-as-needed background">
+                <div class="row table">
+                    <div ng-repeat="movie in genreMovies = (genre.movies)" class="col col-33 shortInfo" style="display: table-row;">
                         <div class="col col-center card smallMovieCard" ui-sref="app.movies.detail({movie: [movie.id, genreMovies[$index - 1].id, genre.id, genreMovies[$index + 1].id] })">
                             <!-- <div class="col col-center card smallMovieCard" on-tap="detail(movie)"> -->
                             <img class="center smallImage" src="{{ movie.cover_small }}" alt="">

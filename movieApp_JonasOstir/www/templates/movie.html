@@ -3,15 +3,14 @@
         <div class="list card">
             <div class="item item-body cardBlock">
                 <img class="fullCover center" src="{{ movie.content.cover_small }}">
-                <div class="smallTitle">
-                    {{ movie.content.description_plain }}
+                <div class="smallTitle" ng-bind-html="movie.content.description">
                 </div>
 
                 <h2>Cast:</h2>
                 <ion-scroll direction="x" class="wide-as-needed borderBottom">
                     <div class="row">
                         <div ng-repeat="actor in movie.content.actors" class="col col-33 shortInfo">
-                            <div class="col col-center card smallMovieCard" ui-sref="app.people.detail({person: actor.id})">{{ actor.id }}
+                            <div class="col col-center card smallMovieCard" ui-sref="app.people.detail({person: actor.id})">
                                 <img class="center smallActor" src="http://moviesdb.brm.us/files/people/{{actor.id}}.jpg" alt="">
                             </div>
                         </div>
@@ -19,15 +18,9 @@
                 </ion-scroll>
             </div>
             <div class="item tabs tabs-secondary tabs-icon-left">
-                <!-- <a class="tab-item" ui-sref="app.movies.detail({movie: previousMovieId })">
-                    <i class="icon ion-chevron-left"></i>
-                </a> -->
                 <a class="tab-item" ng-click="goBack()">
                     Go Back
                 </a>
-                <!-- <a class="tab-item" ui-sref="app.movies.detail({movie: nextMovieId })">
-                    <i class="icon ion-chevron-right"></i>
-                </a> -->
             </div>
         </div>
     </ion-content>

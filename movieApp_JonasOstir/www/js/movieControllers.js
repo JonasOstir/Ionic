@@ -100,14 +100,9 @@ moviesControllers.controller('movieDetailController', function($scope, $state, A
 	$scope.genreId = genre.id;
 
 	$scope.goBack = function() {
-		$state.go('app.movies.index');
+		window.history.back();
 	}
 
-	// $scope.detail = function(actorId) {
-	// 	$state.go('app.people.detail', {
-	// 		'person': actorId
-	// 	});
-	// }
 });
 
 moviesControllers.controller('introController', function($scope, $state, Api, $ionicPopup, $localstorage) {

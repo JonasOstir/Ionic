@@ -4,8 +4,7 @@
         <div class="list card">
             <div class="item item-body cardBlock">
                 <img class="fullCover center" src="{{ person[0].content.photo }}">
-                <div class="smallTitle">
-                    {{ person[0].content.description }}
+                <div class="smallTitle" ng-bind-html="person[0].content.description">
                 </div>
 
                 <h2>Stared in:</h2>
@@ -14,7 +13,7 @@
                         <div ng-repeat="movie in person[1].content.movies" class="col col-33 shortInfo">
                             <div class="col col-center card smallMovieCard" ui-sref="app.movies.detail({movie: movie.id})">
                                 <h3 class="smallTitle">{{ movie.title }}</h3>
-                                <img class="center smallMovie" src="{{ movie.cover_small }}" alt="">
+                                <img class="center smallImage" src="{{ movie.cover_small }}" alt="">
                             </div>
                         </div>
                     </div>
